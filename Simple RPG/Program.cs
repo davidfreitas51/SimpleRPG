@@ -26,7 +26,7 @@ namespace Simple_RPG
 
             Fight.Combat(player, stoneGuardian);
             //Places.Places.Dungeon(player, dungeonEntities);
-            Console.WriteLine("Where you wanna go?\n");
+            Console.WriteLine("Where you wanna go?\n1 - Dungeon");
         }
     }
 }
