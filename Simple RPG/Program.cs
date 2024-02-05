@@ -26,6 +26,8 @@ namespace Simple_RPG
 
             Fight.Combat(player, stoneGuardian);
             //Places.Places.Dungeon(player, dungeonEntities);
+
+            Console.WriteLine("Something to test");
         }
     }
 }
