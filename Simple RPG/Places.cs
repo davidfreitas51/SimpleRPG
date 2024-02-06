@@ -14,5 +14,29 @@ namespace Places
             foreach (string phrase in phrasesBeforeBattle) { Helpful.Utility.WriteTimeClear(phrase, 3000); }
             Fight.Combat(player, enemy);
         }
+        public static void Hospital(Player player)
+        {
+            while (true)
+            {
+                Helpful.Utility.WriteTimeClear($"Hospital\n\nGreetings! What you wanna do?\n-----------------\nYour HP: {player.MaxHealth}/{player.CurrentHealth}\n-----------------\n1 - Heal (10 gold) | 2 - Exit\n", 0, true);
+                string responseHospital = Console.ReadLine();
+                if (responseHospital == "1")
+                {
+                    Helpful.Utility.WriteTimeClear("Okay, here...", 3000, true);
+                    Helpful.Utility.WriteTimeClear("You are healed now!", 2000);
+                    player.Money -= 10;
+                    player.CurrentHealth = player.MaxHealth;
+                }
+                else if (responseHospital == "2")
+                {
+                    Helpful.Utility.WriteTimeClear("Okay, see you...", 2000, false, true);
+                    break;
+                }
+                else
+                {
+                    Helpful.Utility.WriteTimeClear("Character not recognized", 2000, false, true);
+                }
+            }
+        }
     }
 }

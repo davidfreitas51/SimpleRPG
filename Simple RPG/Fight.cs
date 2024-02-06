@@ -35,17 +35,15 @@ namespace Combat
                 Attacks.AttackEffect creatureAttackEffect = (Attacks.AttackEffect)caster.AttackList[currentAttack];
                 Helpful.Utility.WriteTimeClear(creatureAttackEffect.effect, 3000, false, true);
                 target.Affected = true;
-                if (creatureAttackEffect.effectType == 1) { target.Frozen = Helpful.Utility.GenerateRandomNumber(1, 3)+1; }
-                else if (creatureAttackEffect.effectType == 2) { target.Stun = Helpful.Utility.GenerateRandomNumber(1, 3)+1; }
+                if (creatureAttackEffect.effectType == 1) { target.Frozen = Helpful.Utility.GenerateRandomNumber(1, 3); }
+                else if (creatureAttackEffect.effectType == 2) { target.Stun = Helpful.Utility.GenerateRandomNumber(1, 3); }
             }
         }
         public static void lowerEffectTime(Entities.Entity entity)
         {
-            Helpful.Utility.WriteTimeClear(entity.Frozen.ToString(), 5000);
             if (entity.Frozen > 0)
             {
                 entity.Frozen--;
-                Helpful.Utility.WriteTimeClear(entity.Frozen.ToString(), 5000);
                 if (entity.Frozen == 0)
                 {
                     Helpful.Utility.WriteTimeClear("It breaks the ice!", 3000);
@@ -57,7 +55,7 @@ namespace Combat
                 entity.Stun -= 1;
                 if (entity.Stun == 0)
                 { 
-                    Helpful.Utility.WriteTimeClear("It get rid of the stun!", 3000);
+                    Helpful.Utility.WriteTimeClear("It gets rid of the stun!", 3000);
                     entity.Affected = false;
                 }
             }
@@ -72,7 +70,7 @@ namespace Combat
                 int numOptions = 1;
                 int turn = 0;
                 Dictionary<string, Attacks.Attacks> attackDicctionary = new Dictionary<string, Attacks.Attacks>();
-                Console.WriteLine($"What you wanna do?\n-------------------\nPlayer: {player.CurrentHealth}/{player.MaxHealth}\n{enemy.Name}: {enemy.CurrentHealth}/{enemy.MaxHealth}");
+                Console.WriteLine($"What you wanna do?\n-------------------\nPlayer: {player.MaxHealth}/{player.CurrentHealth}\n{enemy.Name}: {enemy.MaxHealth}/{enemy.CurrentHealth}");
                 foreach (Attacks.Attacks attack in player.AttackList)
                 {
                     Console.WriteLine($"{numOptions} - {attack.attackName}");
