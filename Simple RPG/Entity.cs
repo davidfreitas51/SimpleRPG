@@ -6,8 +6,8 @@ namespace Entities
 {
     public abstract class Entity
     {
-        public int CurrentHealth { get; set; }
         public int MaxHealth { get; set; }
+        public int CurrentHealth { get; set; }
         public int Money { get; set; }
         public bool Block {  get; set; }
         public List<Attacks.Attacks> AttackList { get; set; }
@@ -16,10 +16,10 @@ namespace Entities
         public int Frozen { get; set; }
         public bool Affected { get; set; }
 
-        public Entity(int currentHealth, int maxHealth, int money, List<Attacks.Attacks> attackList, string name)
+        public Entity(int maxHealth, int currentHealth, int money, List<Attacks.Attacks> attackList, string name)
         {
-            this.CurrentHealth = currentHealth;
             this.MaxHealth = maxHealth;
+            this.CurrentHealth = currentHealth;
             this.Money = money;
             this.Block = false;
             this.AttackList = attackList;
@@ -34,7 +34,7 @@ namespace Entities
         public string presentingPhrase1 { get; set; }
         public string presentingPhrase2 { get; set; }
 
-        public Monster(int currentHealth, int maxHealth, int money, List<Attacks.Attacks> attackList, string name, string presentingPhrase1, string presentingPhrase2) : base(currentHealth, maxHealth, money, attackList, name)
+        public Monster(int maxHealth, int currentHealth, int money, List<Attacks.Attacks> attackList, string name, string presentingPhrase1, string presentingPhrase2) : base(maxHealth, currentHealth, money, attackList, name)
         {
             this.presentingPhrase1 = presentingPhrase1;
             this.presentingPhrase2 = presentingPhrase2;

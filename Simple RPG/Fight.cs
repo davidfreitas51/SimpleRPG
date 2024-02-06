@@ -147,6 +147,8 @@ namespace Combat
                 {
                     player.Frozen = player.Stun = 0;
                     player.Affected = false;
+                    Places.Places.Hospital(player, true);
+                    break;
                 }
                 else if (enemy.CurrentHealth <= 0 && player.CurrentHealth > 0)
                 {
