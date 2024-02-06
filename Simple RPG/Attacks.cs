@@ -1,6 +1,4 @@
 ﻿using Helpful;
-using Simple_RPG;
-using System.Runtime.CompilerServices;
 
 namespace Attacks
 {

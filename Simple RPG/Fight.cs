@@ -1,8 +1,6 @@
 ﻿using Entities;
 using Helpful;
 using Places;
-using System.Numerics;
-using System;
 
 namespace Combat
 {

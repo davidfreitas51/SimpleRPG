@@ -35,6 +35,7 @@ namespace Simple_RPG
                         Places.Places.Hospital(player);
                         break;
                     case "3":
+                        Places.Places.Blacksmith(player);
                         break;
                     case "4":
                         break;

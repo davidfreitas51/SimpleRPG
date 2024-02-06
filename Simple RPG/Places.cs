@@ -10,6 +10,7 @@ namespace Places
         {
             Monster enemy = dungeonEntities[Helpful.Utility.GenerateRandomNumber(0, dungeonEntities.Count)];
             List<string> phrasesBeforeBattle = new List<string>();
+            Console.Clear();
             phrasesBeforeBattle.AddRange(new[] { "You step into the ominous depths of the dungeons..", "Suddenly, a noise catches your attention..", enemy.presentingPhrase1, enemy.presentingPhrase2 });
             foreach (string phrase in phrasesBeforeBattle) { Helpful.Utility.WriteTimeClear(phrase, 3000); }
             Fight.Combat(player, enemy);
@@ -32,10 +33,15 @@ namespace Places
                     Helpful.Utility.WriteTimeClear("Okay, see you...", 2000, false, true);
                     break;
                 }
-                else
-                {
-                    Helpful.Utility.WriteTimeClear("Character not recognized", 2000, false, true);
-                }
+                else { Helpful.Utility.WriteTimeClear("Character not recognized", 2000, false, true); }
+            }
+        }
+        public static void Blacksmith(Player player)
+        {
+            while (true)
+            {
+                Helpful.Utility.WriteTimeClear($"Blacksmith\n\nWelcome! What brings you here?\n-----------------\nYour money: {player.Money}\n-----------------\n1 - Reforge | 2 - Exit\n", 0, true);
+                string responseHospital = Console.ReadLine();
             }
         }
     }
