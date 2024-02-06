@@ -41,7 +41,11 @@ namespace Places
             while (true)
             {
                 Helpful.Utility.WriteTimeClear($"Blacksmith\n\nWelcome! What brings you here?\n-----------------\nYour money: {player.Money}\n-----------------\n1 - Reforge | 2 - Exit\n", 0, true);
-                string responseHospital = Console.ReadLine();
+                string responseBlacksmith = Console.ReadLine();
+                if (responseBlacksmith == "1")
+                {
+                    //blablabla
+                }
             }
         }
     }
