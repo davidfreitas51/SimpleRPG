@@ -33,7 +33,7 @@ namespace Combat
             if (caster.AttackList[currentAttack] is Attacks.AttackEffect)
             {
                 Attacks.AttackEffect creatureAttackEffect = (Attacks.AttackEffect)caster.AttackList[currentAttack];
-                Helpful.Utility.WriteTimeClear(creatureAttackEffect.effect, 3000);
+                Helpful.Utility.WriteTimeClear(creatureAttackEffect.effect, 3000, false, true);
                 target.Affected = true;
                 if (creatureAttackEffect.effectType == 1) { target.Frozen = Helpful.Utility.GenerateRandomNumber(1, 3)+1; }
                 else if (creatureAttackEffect.effectType == 2) { target.Stun = Helpful.Utility.GenerateRandomNumber(1, 3)+1; }
@@ -41,17 +41,25 @@ namespace Combat
         }
         public static void lowerEffectTime(Entities.Entity entity)
         {
+            Helpful.Utility.WriteTimeClear(entity.Frozen.ToString(), 5000);
             if (entity.Frozen > 0)
             {
-                entity.Frozen -= 1;
-                if (entity.Frozen == 0) { Helpful.Utility.WriteTimeClear("It breaks the ice!", 3000); }
-                entity.Affected = false;
+                entity.Frozen--;
+                Helpful.Utility.WriteTimeClear(entity.Frozen.ToString(), 5000);
+                if (entity.Frozen == 0)
+                {
+                    Helpful.Utility.WriteTimeClear("It breaks the ice!", 3000);
+                    entity.Affected = false;
+                }
             }
             else if (entity.Stun > 0)
             {
                 entity.Stun -= 1;
-                if (entity.Stun == 0) { Helpful.Utility.WriteTimeClear("It get rid of the stun!", 3000); }
-                entity.Affected = false;
+                if (entity.Stun == 0)
+                { 
+                    Helpful.Utility.WriteTimeClear("It get rid of the stun!", 3000);
+                    entity.Affected = false;
+                }
             }
         }
         public static void Combat(Player player, Entities.Entity enemy)
@@ -144,7 +152,7 @@ namespace Combat
                     player.Frozen = player.Stun = 0;
                     player.Affected = false;
                 }
-                else if (enemy.CurrentHealth < 0 && player.CurrentHealth > 0)
+                else if (enemy.CurrentHealth <= 0 && player.CurrentHealth > 0)
                 {
                     Helpful.Utility.WriteTimeClear($"The {enemy.Name} was defeated by the player, dropping {enemy.Money} gold coins!\nGood job!", 5000, true, true);
                     player.Money += enemy.Money;

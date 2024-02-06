@@ -35,7 +35,7 @@ namespace Entities
         public string presentingPhrase1 { get; set; }
         public string presentingPhrase2 { get; set; }
 
-        public Monster(int health, int maxHealth, int money, List<Attacks.Attacks> attackList, string name, string presentingPhrase1, string presentingPhrase2) : base(health, maxHealth, money, attackList, name)
+        public Monster(int currentHealth, int maxHealth, int money, List<Attacks.Attacks> attackList, string name, string presentingPhrase1, string presentingPhrase2) : base(currentHealth, maxHealth, money, attackList, name)
         {
             this.presentingPhrase1 = presentingPhrase1;
             this.presentingPhrase2 = presentingPhrase2;
