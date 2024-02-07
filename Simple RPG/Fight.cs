@@ -22,7 +22,7 @@ namespace Combat
             else
             {
                 Helpful.Utility.WriteTimeClear("It misses!\n", 3000);
-                Helpful.Utility.WriteTimeClear("Nothing happens!", 2000, false, true);
+                Helpful.Utility.WriteTimeClear("Nothing more happens!", 2000, false, true);
                 return 0;
             }
         }
@@ -35,6 +35,19 @@ namespace Combat
                 target.Affected = true;
                 if (creatureAttackEffect.effectType == 1) { target.Frozen = Helpful.Utility.GenerateRandomNumber(1, 3); }
                 else if (creatureAttackEffect.effectType == 2) { target.Stun = Helpful.Utility.GenerateRandomNumber(1, 3); }
+                else if (creatureAttackEffect.effectType == 3)
+                {
+                    int timesHitted = 0;
+                    while (true)
+                    {
+                        int accuracy = TestAccuracy(caster.AttackList[currentAttack].attackAccuracy);
+                        if (accuracy > 0) { timesHitted++; }
+                        else { break; }
+                    }
+                    Helpful.Utility.WriteTimeClear($"It hits {timesHitted} more times, causing {timesHitted * caster.AttackList[currentAttack].attackDamage} points of damage", 3000, false, true);
+                    target.CurrentHealth -= 20;
+                    target.Affected = false;
+                }
             }
         }
         public static void lowerEffectTime(Entities.Entity entity)
