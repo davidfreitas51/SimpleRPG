@@ -1,6 +1,7 @@
 ﻿using Entities;
 using Helpful;
 using Combat;
+using Simple_RPG;
 
 namespace Places
 {
@@ -56,25 +57,99 @@ namespace Places
             while (true)
             {
                 List<string> blacksmithUpgrades = new List<string>();
+                List<int> itemsLevel = new List<int>();
+
                 blacksmithUpgrades.AddRange(new List<string> { "Armor", "Sword", "Magic", "Stunning Ray" });
+                itemsLevel.AddRange(new List<int> { player.ArmorUpgrades, player.SwordUpgrades, player.MagicUpgrades });
+                if ( player.AttackList.Count > 2 ) { blacksmithUpgrades.Remove("Stunning Ray"); }
+                
                 Helpful.Utility.WriteTimeClear($"Blacksmith\n\nWelcome! What brings you here?\n-----------------\nYour money: {player.Money}\n-----------------\n1 - Reforge | 2 - Exit\n", 0, true);
                 string responseBlacksmith = Console.ReadLine();
-
+                int indexDicctionary = 1;
+                Dictionary<string, string> upgradesDicctionary = new Dictionary<string, string>();
                 if (responseBlacksmith == "1")
                 {
-                    Helpful.Utility.WriteTimeClear($"Blacksmith\n\nWhat you want to reforge?\n", 0);
-                    foreach (string itemUpgrade in blacksmithUpgrades)
+                    Helpful.Utility.WriteTimeClear($"Blacksmith\nYour money: {player.Money}\n-------------", 0, true);
+                    foreach(string item in blacksmithUpgrades)
                     {
-                        Console.WriteLine(itemUpgrade);
+                        Console.Write($"{indexDicctionary} - {item}  =  ");
+                        upgradesDicctionary[indexDicctionary.ToString()] = item;
+                        if (indexDicctionary == 1) { Console.Write(((player.ArmorUpgrades * 20) +80)); }
+                        else if (indexDicctionary == 2) { Console.Write(((player.SwordUpgrades * 20) + 80)); }
+                        else if (indexDicctionary == 3) { Console.Write(((player.MagicUpgrades * 20) + 80)); }
+                        else if (indexDicctionary == 4) { Console.Write((200)); }
+                        Console.WriteLine(" gold coins");
+                        indexDicctionary++;
                     }
-                    string responseBlacksmithUpgrades = Console.ReadLine();
+                    Console.WriteLine($"5 - Quit");
+                    string upgradeResponse = Console.ReadLine();
+                    if (upgradesDicctionary.ContainsKey(upgradeResponse))
+                    {
+                        if (upgradeResponse == "1")
+                        {
+                            if (player.Money < ((player.ArmorUpgrades * 20) + 80)) { Helpful.Utility.WriteTimeClear("You don't have enough money!", 2000); }
+                            else
+                            {
+                                player.MaxHealth += 20;
+                                player.CurrentHealth += 20;
+                                Helpful.Utility.WriteTimeClear("Alright, just a moment...", 2500, true);
+                                Helpful.Utility.WriteTimeClear("There we go! Your armor has been upgraded!", 2500, false, true);
+                                player.Money -= ((player.ArmorUpgrades * 20) + 80);
+                                player.ArmorUpgrades += 1;
+                            }
+                        }
+                        else if (upgradeResponse == "2")
+                        {
+                            if (player.Money < ((player.SwordUpgrades * 20) + 80)) { Helpful.Utility.WriteTimeClear("You don't have enough money!", 2000); }
+                            else
+                            {
+                                Helpful.Utility.WriteTimeClear("Alright, just a moment...", 2500, true);
+                                Helpful.Utility.WriteTimeClear("There we go! Your sword has been upgraded!", 2500, false, true);
+                                Attacks.Attacks swordAttack = new Attacks.Attacks(player.AttackList[0].attackDamage + 20, 100, "swing the sword in attack!", "Sword atk.");
+                                player.AttackList[0] = swordAttack;
+                                player.Money -= ((player.SwordUpgrades * 20) + 80);
+                                player.SwordUpgrades += 1;
+                            }
+                        }
+                        else if (upgradeResponse == "3")
+                        {
+                            if (player.Money < ((player.MagicUpgrades * 20) + 80)) { Helpful.Utility.WriteTimeClear("You don't have enough money!", 2000); }
+                            else
+                            {
+                                Helpful.Utility.WriteTimeClear("Alright, just a moment...", 2500, true);
+                                Helpful.Utility.WriteTimeClear("There we go! Your magic spell has been upgraded!", 2500, false, true);
+                                Attacks.Attacks magicAttack = new Attacks.Attacks(player.AttackList[1].attackDamage + 20, 100, "swing the sword in attack!", "Sword atk.");
+                                player.AttackList[0] = magicAttack;
+                                player.Money -= ((player.MagicUpgrades * 20) + 80);
+                                player.MagicUpgrades += 1;
+                            }
+                        }
+                        else if (upgradeResponse == "4" && player.AttackList.Count < 3)
+                        {
+                            if (player.Money < 200) { Helpful.Utility.WriteTimeClear("You don't have enough money!", 2000); }
+                            else
+                            {
+                                Helpful.Utility.WriteTimeClear("This is a pretty powerful spell, but very occasional", 2500, true);
+                                Helpful.Utility.WriteTimeClear("It stuns the enemy for 2 to 3 turns!\nStill want to buy it?\n1 - Yes\n2 - No", 0, false);
+                                string inputStunAttack = Console.ReadLine();
+                                if (inputStunAttack == "1")
+                                {
+                                    Helpful.Utility.WriteTimeClear("Here, it's yours!", 2000);
+                                    player.Money -= 200;
+                                    player.ArmorUpgrades += 1;
+                                    Attacks.Attacks stunningRay = new Attacks.AttackEffect(0, 50, "channel a storm!", "Stunning Ray", "It stuns the opponent", 2, "stunned");
+                                    player.AttackList.Add(stunningRay);
+                                }
+                                else if (inputStunAttack == "2") { }
+                                else { Helpful.Utility.WriteTimeClear("Not recognized character", 2000);  }
+                            }
+                        }
+                        else if (upgradeResponse == "5") { }
+                        else {Helpful.Utility.WriteTimeClear("Not recognized character!", 2000);}
+                    }
                 }
-                else if(responseBlacksmith == "2")
-                {
-                    Helpful.Utility.WriteTimeClear("Safe travels, adventurer. 'Til the next hammer's song!", 2000, false, true);
-                    break;
-                }
-                else { Helpful.Utility.WriteTimeClear("Not recognized character!", 2000);  }
+                else if ( responseBlacksmith == "2") { Helpful.Utility.WriteTimeClear("Until our next forging, safe travels!", 2500, false, true); break; }
+                else { Helpful.Utility.WriteTimeClear("Not recognized character!", 2000, false, true); }
             }
         }
     }

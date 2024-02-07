@@ -20,7 +20,7 @@ namespace Entities
         {
             this.MaxHealth = maxHealth;
             this.CurrentHealth = currentHealth;
-            this.Money = money;
+            this.Money = 10000000;
             this.Block = false;
             this.AttackList = attackList;
             this.Name = name;

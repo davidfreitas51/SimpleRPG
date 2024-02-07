@@ -28,6 +28,5 @@ namespace Helpful
             }
             return attacksList;
         }
-        public static
     }
 }

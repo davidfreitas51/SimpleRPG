@@ -10,12 +10,12 @@ namespace Simple_RPG
         static void Main(string[] args)
         {
             Attacks.Attacks swordAttack = new Attacks.Attacks(200, 100, "swing the sword in attack!", "Sword atk.");
-            Attacks.Attacks kickAttack = new Attacks.Attacks(20, 75, "unleash magical energy and attacks with a spell!", "Magic atk.");
+            Attacks.Attacks magicAttack = new Attacks.Attacks(20, 75, "unleash magical energy and attacks with a spell!", "Magic atk.");
             Attacks.Attacks freezingRay = new Attacks.AttackEffect(0, 50, "channel icy power, casting a freezing ray!", "Freezing Ray", "It freezes the opponent!", 1, "frozen");
             Attacks.Attacks stunningRay = new Attacks.AttackEffect(0, 50, "channel a storm!", "Stunning Ray", "It stuns the opponent", 2, "stunned");
 
-            List<Attacks.Attacks> playerAttack = Helpful.Utility.CreatingAttackLists(swordAttack, kickAttack, stunningRay);
-            List<Attacks.Attacks> stoneGuardianAttacks = Helpful.Utility.CreatingAttackLists(swordAttack, kickAttack);
+            List<Attacks.Attacks> playerAttack = Helpful.Utility.CreatingAttackLists(swordAttack, magicAttack);
+            List<Attacks.Attacks> stoneGuardianAttacks = Helpful.Utility.CreatingAttackLists(swordAttack, magicAttack);
 
             Player player = new Player(1000, 100, 0, playerAttack, "Player");
             Monster stoneGuardian = new Monster(1000, 1000, Helpful.Utility.GenerateRandomNumber(80, 160), stoneGuardianAttacks, "Stone Guardian", "The earth trembles beneath an approaching monster..", "A stone creature strides purposefully toward you!!");
