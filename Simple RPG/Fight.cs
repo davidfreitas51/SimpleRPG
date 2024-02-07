@@ -50,8 +50,8 @@ namespace Combat
                 }
                 else if (creatureAttackEffect.effectType == 4)
                 {
-                    caster.Affected = true;
                     caster.Stun = 1;
+                    caster.Casting = true;
                 }
             }
         }
@@ -138,9 +138,15 @@ namespace Combat
                 {
                     enemy.Block = false;
                     Helpful.Utility.WriteTimeClear($"{enemy.Name}'s action:\n", 0, true);
-                    if (enemy.AttackList[enemyCurrentAttack].attackName == "Arcane Crush")
+                    if (enemy.Casting)
                     {
-
+                        if (enemy.Affected == false)
+                        {
+                            int enemyPrecision = TestAccuracy(enemy.AttackList[enemyCurrentAttack].attackAccuracy);
+                            Helpful.Utility.WriteTimeClear($"The enemy releases it, causing {enemy.AttackList[enemyCurrentAttack].attackDamage * enemyPrecision} ", 3000);
+                            enemy.Casting = false;
+                        }
+                        else { Helpful.Utility.WriteTimeClear("The player cancelled the cast!", 2000); enemy.Casting = false; }
                     }
                     if (enemy.Affected && enemy.AttackList[enemyCurrentAttack].attackName != "Arcane Crush")
                     {
@@ -151,8 +157,8 @@ namespace Combat
                     }
                     else
                     {
-                        Helpful.Utility.WriteTimeClear($"It {enemy.AttackList[enemyCurrentAttack].attackDescription}", 3000);
                         int enemyPrecision = TestAccuracy(enemy.AttackList[enemyCurrentAttack].attackAccuracy);
+                        Helpful.Utility.WriteTimeClear($"It {enemy.AttackList[enemyCurrentAttack].attackDescription}", 3000);
                         if (enemyPrecision > 0)
                         {
                             if (player.Block) { Helpful.Utility.WriteTimeClear("The player was blocking!\nIt deals 0 points of damage", 3000, false, true); }

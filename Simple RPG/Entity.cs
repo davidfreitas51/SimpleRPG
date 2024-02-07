@@ -8,23 +8,23 @@ namespace Entities
     {
         public int MaxHealth { get; set; }
         public int CurrentHealth { get; set; }
-        public int Money { get; set; }
         public bool Block {  get; set; }
         public List<Attacks.Attacks> AttackList { get; set; }
         public string Name { get; set; }
+        public int Money { get; set; }
         public int Stun {  get; set; }
         public int Frozen { get; set; }
         public bool Affected { get; set; }
         public bool Casting { get; set; }
 
-        public Entity(int maxHealth, int currentHealth, int money, List<Attacks.Attacks> attackList, string name)
+        public Entity(int maxHealth, int currentHealth, List<Attacks.Attacks> attackList, string name, int money = 0)
         {
             this.MaxHealth = maxHealth;
             this.CurrentHealth = currentHealth;
-            this.Money = 10000000;
             this.Block = false;
             this.AttackList = attackList;
             this.Name = name;
+            this.Money = money;
             this.Stun = 0;
             this.Frozen = 0;
             this.Affected = false;
@@ -36,7 +36,7 @@ namespace Entities
         public string presentingPhrase1 { get; set; }
         public string presentingPhrase2 { get; set; }
 
-        public Monster(int maxHealth, int currentHealth, int money, List<Attacks.Attacks> attackList, string name, string presentingPhrase1, string presentingPhrase2) : base(maxHealth, currentHealth, money, attackList, name)
+        public Monster(int maxHealth, int currentHealth, List<Attacks.Attacks> attackList, string name, string presentingPhrase1, string presentingPhrase2, int money = 0) : base(maxHealth, currentHealth, attackList, name, money)
         {
             this.presentingPhrase1 = presentingPhrase1;
             this.presentingPhrase2 = presentingPhrase2;
@@ -49,7 +49,7 @@ namespace Entities
         public int ArmorUpgrades { get; set; }
         public int MagicUpgrades { get; set; }
 
-        public Player(int health, int maxHealth, int money, List<Attacks.Attacks> attackList, string name) : base(health, maxHealth, money, attackList, name)
+        public Player(int health, int maxHealth, List<Attacks.Attacks> attackList, string name, int money = 0) : base(health, maxHealth, attackList, name, money)
         {
             this.SwordUpgrades = 1;
             this.ArmorUpgrades = 1;
