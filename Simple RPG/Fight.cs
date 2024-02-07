@@ -48,6 +48,11 @@ namespace Combat
                     target.CurrentHealth -= 20;
                     target.Affected = false;
                 }
+                else if (creatureAttackEffect.effectType == 4)
+                {
+                    caster.Affected = true;
+                    caster.Stun = 1;
+                }
             }
         }
         public static void lowerEffectTime(Entities.Entity entity)
@@ -132,13 +137,17 @@ namespace Combat
                 if (enemy.CurrentHealth > 0 && turn == 1)
                 {
                     enemy.Block = false;
-                    enemyCurrentAttack = Helpful.Utility.GenerateRandomNumber(0, enemy.AttackList.Count);
                     Helpful.Utility.WriteTimeClear($"{enemy.Name}'s action:\n", 0, true);
-                    if (enemy.Affected)
+                    if (enemy.AttackList[enemyCurrentAttack].attackName == "Arcane Crush")
+                    {
+
+                    }
+                    if (enemy.Affected && enemy.AttackList[enemyCurrentAttack].attackName != "Arcane Crush")
                     {
                         Helpful.Utility.WriteTimeClear($"The enemy was affected by {player.AttackList[Convert.ToInt32(playerAction)-1].attackName}", 3000);
                         lowerEffectTime(enemy);
                         Helpful.Utility.WriteTimeClear("Nothing else happens.", 2000, false, true);
+                    enemyCurrentAttack = Helpful.Utility.GenerateRandomNumber(0, enemy.AttackList.Count);
                     }
                     else
                     {

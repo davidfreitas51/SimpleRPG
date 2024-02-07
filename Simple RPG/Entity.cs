@@ -15,6 +15,7 @@ namespace Entities
         public int Stun {  get; set; }
         public int Frozen { get; set; }
         public bool Affected { get; set; }
+        public bool Casting { get; set; }
 
         public Entity(int maxHealth, int currentHealth, int money, List<Attacks.Attacks> attackList, string name)
         {
@@ -27,6 +28,7 @@ namespace Entities
             this.Stun = 0;
             this.Frozen = 0;
             this.Affected = false;
+            this.Casting = false;
         }
     }
     public class Monster : Entity

@@ -14,10 +14,10 @@ namespace Simple_RPG
             Attacks.Attacks magicAttack = new Attacks.Attacks(20, 75, "unleash magical energy and attacks with a spell!", "Magic atk.");
             Attacks.Attacks freezingRay = new Attacks.AttackEffect(0, 50, "channel icy power, casting a freezing ray!", "Freezing Ray", "It freezes the opponent!", 1, "frozen");
             Attacks.Attacks stunningRay = new Attacks.AttackEffect(0, 50, "channel a storm!", "Stunning Ray", "It stuns the opponent", 2, "stunned");
-            Attacks.Attacks shadowsSpeed = new Attacks.AttackEffect(10, 80, "strikes with swift shadow kicks", "Shadow Speed", "It keeps attacking!", 3, "");
-
+            Attacks.Attacks shadowsSpeed = new Attacks.AttackEffect(10, 75, "strikes with swift shadow kicks", "Shadow Speed", "It keeps attacking!", 3, "");
+            Attacks.Attacks arcaneCrush = new Attacks.AttackEffect(0, 80, "starts casting a powerful spell", "Arcane Crush", "It starts casting a powerful spell", 4, "");
             List<Attacks.Attacks> playerAttack = Helpful.Utility.CreatingAttackLists(swordAttack, magicAttack);
-            List<Attacks.Attacks> stoneGuardianAttacks = Helpful.Utility.CreatingAttackLists(shadowsSpeed);
+            List<Attacks.Attacks> stoneGuardianAttacks = Helpful.Utility.CreatingAttackLists(arcaneCrush);
 
             Player player = new Player(100, 100, 0, playerAttack, "Player");
             Monster stoneGuardian = new Monster(100, 100, Helpful.Utility.GenerateRandomNumber(80, 160), stoneGuardianAttacks, "Stone Guardian", "The earth trembles beneath an approaching monster..", "A stone creature strides purposefully toward you!!");
