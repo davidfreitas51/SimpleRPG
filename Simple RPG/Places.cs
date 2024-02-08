@@ -13,7 +13,7 @@ namespace Places
             List<string> phrasesBeforeBattle = new List<string>();
             Console.Clear();
             phrasesBeforeBattle.AddRange(new[] { "You step into the ominous depths of the dungeons..", "Suddenly, a noise catches your attention..", enemy.presentingPhrase1, enemy.presentingPhrase2 });
-            foreach (string phrase in phrasesBeforeBattle) { Helpful.Utility.WriteTimeClear(phrase, 3000); }
+            foreach (string phrase in phrasesBeforeBattle) { Helpful.Utility.WriteTimeClear(phrase, 3500); }
             Fight.Combat(player, enemy);
         }
 
@@ -150,6 +150,29 @@ namespace Places
                 }
                 else if ( responseBlacksmith == "2") { Helpful.Utility.WriteTimeClear("Until our next forging, safe travels!", 2500, false, true); break; }
                 else { Helpful.Utility.WriteTimeClear("Not recognized character!", 2000, false, true); }
+            }
+        }
+        public static void Cave(Player player, Monster boss)
+        {
+            if (player.TotalUpgrades <= 10)
+            {
+                Helpful.Utility.WriteTimeClear("The aura in this cave is dark and dangerous. You'd better upgrade some more before venturing deeper.", 4500);
+            }
+            else
+            {
+                Helpful.Utility.WriteTimeClear("The cave\n\nAs you enter the cave, a chill runs down your spine.", 4500, true);
+                Helpful.Utility.WriteTimeClear("Bloodstains mark the walls, and strange noises echo. ", 4500);
+                Helpful.Utility.WriteTimeClear("Suddenly, silence falls, and a dark feeling surrounds you.", 4500);
+                Helpful.Utility.WriteTimeClear("In that chilling moment, a creature appears.", 4500, false);
+                Helpful.Utility.WriteTimeClear("Its terrifying presence makes you tremble, but you know it's time for the showdown.", 6500, false, true);
+                Fight.Combat(player, boss);
+                Helpful.Utility.WriteTimeClear($"{boss.CurrentHealth} ||| {player.CurrentHealth}", 5000);
+                if (boss.CurrentHealth <= 0 && player.CurrentHealth > 0)
+                {
+                    Helpful.Utility.WriteTimeClear("Victorious, you stand over the defeated boss\nA sense of accomplishment washes over you\nThe echoes of battle fade\n\nCongratulations, brave adventurer!\nYou have triumphed over the formidable foe.\nYour courage and skill have prevailed.\nThe cave's darkness recedes, thanks to your valiant efforts.\n\nUntil the next challenge, well done!\n---------------------------\nEnter anything to quit\n\n", 0, true);
+                    Console.ReadLine();
+                    Console.Clear();
+                }
             }
         }
     }

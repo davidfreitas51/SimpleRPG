@@ -15,7 +15,6 @@ namespace Entities
         public int Stun {  get; set; }
         public int Frozen { get; set; }
         public bool Affected { get; set; }
-        public bool Casting { get; set; }
 
         public Entity(int maxHealth, int currentHealth, List<Attacks.Attacks> attackList, string name, int money = 0)
         {
@@ -28,7 +27,6 @@ namespace Entities
             this.Stun = 0;
             this.Frozen = 0;
             this.Affected = false;
-            this.Casting = false;
         }
     }
     public class Monster : Entity
@@ -52,7 +50,7 @@ namespace Entities
         public Player(int health, int maxHealth, List<Attacks.Attacks> attackList, string name, int money = 0) : base(health, maxHealth, attackList, name, money)
         {
             this.SwordUpgrades = 1;
-            this.ArmorUpgrades = 1;
+            this.ArmorUpgrades = 11;
             this.MagicUpgrades = 1;
             this.TotalUpgrades = ArmorUpgrades + MagicUpgrades + SwordUpgrades;
         }
