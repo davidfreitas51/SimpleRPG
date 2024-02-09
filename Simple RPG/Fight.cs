@@ -46,7 +46,7 @@ namespace Combat
                         else { break; }
                     }
                     Helpful.Utility.WriteTimeClear($"It hits {timesHitted} more times, causing {timesHitted * caster.AttackList[currentAttack].attackDamage} points of damage", 3000, false, true);
-                    target.CurrentHealth -= 20;
+                    target.CurrentHealth -= timesHitted * caster.AttackList[currentAttack].attackDamage;
                     target.Affected = false;
                 }
             }
@@ -91,7 +91,7 @@ namespace Combat
                 }
                 Console.WriteLine($"{numOptions} - Info\n{numOptions+1} - Block");
                 string playerAction = Console.ReadLine();
-                if (attackDicctionary.ContainsKey(playerAction))
+                if (attackDicctionary.ContainsKey(playerAction) || attackDicctionary.ContainsKey(playerAction+1))
                 {
                     turn++;
                     if (player.Affected)

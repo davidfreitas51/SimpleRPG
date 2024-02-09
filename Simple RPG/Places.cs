@@ -137,8 +137,8 @@ namespace Places
                                     Helpful.Utility.WriteTimeClear("Here, it's yours!", 2000);
                                     player.Money -= 200;
                                     player.ArmorUpgrades += 1;
-                                    Attacks.Attacks stunningRay = new Attacks.AttackEffect(0, 50, "channel a storm!", "Stunning Ray", "It stuns the opponent", 2, "stunned");
-                                    player.AttackList.Add(stunningRay);
+                                    Attacks.Attacks tempestLock = new Attacks.AttackEffect(0, 50, "channel the storm! Envelops the foe in electrifying stillness.", "Tempest Lock", "It stuns the opponent", 2, "stunned");
+                                    player.AttackList.Add(tempestLock);
                                 }
                                 else if (inputStunAttack == "2") { }
                                 else { Helpful.Utility.WriteTimeClear("Not recognized character", 2000);  }
