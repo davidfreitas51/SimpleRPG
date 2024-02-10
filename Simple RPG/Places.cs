@@ -12,6 +12,7 @@ namespace Places
             Monster enemy = dungeonEntities[Helpful.Utility.GenerateRandomNumber(0, dungeonEntities.Count)];
             List<string> phrasesBeforeBattle = new List<string>();
             Console.Clear();
+            Console.WriteLine("---------- Dungeons ----------\n");
             phrasesBeforeBattle.AddRange(new[] { "You step into the ominous depths of the dungeons..", "Suddenly, a noise catches your attention..", enemy.presentingPhrase1, enemy.presentingPhrase2 });
             foreach (string phrase in phrasesBeforeBattle) { Helpful.Utility.WriteTimeClear(phrase, 3500); }
             Fight.Combat(player, enemy);
@@ -33,7 +34,7 @@ namespace Places
             {
                 while (true)
                 {
-                    Helpful.Utility.WriteTimeClear($"Hospital\n\nGreetings! What you wanna do?\n-----------------\nYour HP: {player.MaxHealth}/{player.CurrentHealth}\n-----------------\n1 - Heal (10 gold) | 2 - Exit\n", 0, true);
+                    Helpful.Utility.WriteTimeClear($"---------- Hospital ----------\nHP: {player.MaxHealth}/{player.CurrentHealth}   |   Money: {player.Money}\n------------------------------\nGreetings! What you wanna do?\n\n1 - Heal (10 gold) | 2 - Exit\n", 0, true);
                     string responseHospital = Console.ReadLine();
                     if (responseHospital == "1")
                     {
@@ -63,13 +64,13 @@ namespace Places
                 itemsLevel.AddRange(new List<int> { player.ArmorUpgrades, player.SwordUpgrades, player.MagicUpgrades });
                 if ( player.AttackList.Count > 2 ) { blacksmithUpgrades.Remove("Stunning Ray"); }
                 
-                Helpful.Utility.WriteTimeClear($"Blacksmith\n\nWelcome! What brings you here?\n-----------------\nYour money: {player.Money}\n-----------------\n1 - Reforge | 2 - Exit\n", 0, true);
+                Helpful.Utility.WriteTimeClear($"---------- Blacksmith ----------\nHP: {player.MaxHealth}/{player.CurrentHealth}   |   Money: {player.Money}\n------------------------------\nWelcome! What brings you here?\n\n1 - Reforge | 2 - Exit\n", 0, true);
                 string responseBlacksmith = Console.ReadLine();
                 int indexDicctionary = 1;
                 Dictionary<string, string> upgradesDicctionary = new Dictionary<string, string>();
                 if (responseBlacksmith == "1")
                 {
-                    Helpful.Utility.WriteTimeClear($"Blacksmith\nYour money: {player.Money}\n-------------", 0, true);
+                    Helpful.Utility.WriteTimeClear($"---------- Blacksmith ----------\nHP: {player.MaxHealth}/{player.CurrentHealth}   |   Money: {player.Money}\n------------------------------\n", 0, true);
                     foreach(string item in blacksmithUpgrades)
                     {
                         Console.Write($"{indexDicctionary} - {item}  =  ");
@@ -163,7 +164,9 @@ namespace Places
                 Helpful.Utility.WriteTimeClear("The cave\n\nAs you enter the cave, a chill runs down your spine.", 4500, true);
                 Helpful.Utility.WriteTimeClear("Bloodstains mark the walls, and strange noises echo. ", 4500);
                 Helpful.Utility.WriteTimeClear("Suddenly, silence falls, and a dark feeling surrounds you.", 4500);
-                Helpful.Utility.WriteTimeClear("In that chilling moment, a creature appears.", 4500, false);
+                Helpful.Utility.WriteTimeClear("In that chilling moment, a creature appears.", 4500);
+                Helpful.Utility.WriteTimeClear("It was a shadowy figure, draped in an ethereal robe", 4500);
+                Helpful.Utility.WriteTimeClear("In its hand was a staff, emitting one can only call a twisted and dark aura.", 4500);
                 Helpful.Utility.WriteTimeClear("Its terrifying presence makes you tremble, but you know it's time for the showdown.", 6500, false, true);
                 Fight.Combat(player, boss);
                 Helpful.Utility.WriteTimeClear($"{boss.CurrentHealth} ||| {player.CurrentHealth}", 5000);

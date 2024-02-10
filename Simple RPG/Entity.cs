@@ -49,8 +49,8 @@ namespace Entities
 
         public Player(int health, int maxHealth, List<Attacks.Attacks> attackList, string name, int money = 0) : base(health, maxHealth, attackList, name, money)
         {
-            this.SwordUpgrades = 1;
-            this.ArmorUpgrades = 11;
+            this.SwordUpgrades = 100;
+            this.ArmorUpgrades = 1;
             this.MagicUpgrades = 1;
             this.TotalUpgrades = ArmorUpgrades + MagicUpgrades + SwordUpgrades;
         }

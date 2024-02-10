@@ -82,7 +82,7 @@ namespace Combat
                 int numOptions = 1;
                 int turn = 0;
                 Dictionary<string, Attacks.Attacks> attackDicctionary = new Dictionary<string, Attacks.Attacks>();
-                Console.WriteLine($"What you wanna do?\n-------------------\nPlayer: {player.MaxHealth}/{player.CurrentHealth}\n{enemy.Name}: {enemy.MaxHealth}/{enemy.CurrentHealth}");
+                Console.WriteLine($"What you wanna do?\n------------------------------------\nPlayer: {player.MaxHealth}/{player.CurrentHealth} | {enemy.Name}: {enemy.MaxHealth}/{enemy.CurrentHealth}\n------------------------------------\n");
                 foreach (Attacks.Attacks attack in player.AttackList)
                 {
                     Console.WriteLine($"{numOptions} - {attack.attackName}");
@@ -96,7 +96,7 @@ namespace Combat
                     turn++;
                     if (player.Affected)
                     {
-                        Helpful.Utility.WriteTimeClear($"\nYou are affected by {enemy.AttackList[enemyCurrentAttack].attackName}!", 3000, false, true);
+                        Helpful.Utility.WriteTimeClear($"\nYou can't attack!", 3000, false, true);
                         lowerEffectTime(player);
                         Helpful.Utility.WriteTimeClear("Nothing else happens.", 2000, false, true);
                     }
@@ -128,7 +128,8 @@ namespace Combat
                     if (attackDicctionary.ContainsKey(requiredInfo)) { Helpful.Utility.WriteTimeClear($"\n{attackDicctionary[requiredInfo].attackName}: You {attackDicctionary[requiredInfo].attackDescription}\nAccuracy - {attackDicctionary[requiredInfo].attackAccuracy}\nDamage - {attackDicctionary[requiredInfo].attackDamage}", 5000, false, true); }
                     else { Helpful.Utility.WriteTimeClear("Character not recognized!", 2000, false, true); }
                 }
-                else if (playerAction == (numOptions + 1).ToString()) { Helpful.Utility.WriteTimeClear("Player's action:\n\nYou assume a defensive stance.", 2500, true); player.Block = true; turn++; }
+                else if (playerAction == (numOptions + 1).ToString() && player.Affected == false) { Helpful.Utility.WriteTimeClear("Player's action:\n\nYou assume a defensive stance.", 2500, true); player.Block = true; turn++; }
+                else if (playerAction == (numOptions + 1).ToString() && player.Affected == true) { Helpful.Utility.WriteTimeClear("You can't attack!", 2500, true); player.Block = true; turn++; }
                 else { Helpful.Utility.WriteTimeClear("Character not recognized!", 2000, false, true); }
 
                 if (enemy.CurrentHealth > 0 && turn == 1)
